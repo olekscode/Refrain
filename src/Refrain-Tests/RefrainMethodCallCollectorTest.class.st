@@ -14,7 +14,7 @@ RefrainMethodCallCollectorTest >> setUp [
 	
 	method := RefrainMethod new
 		className: #RefrainTestsMockClass;
-		selector: #mockSelect:;
+		selector: #mockOldSelect:;
 		yourself.
 		
 	commit := RefrainCommit new
@@ -28,7 +28,7 @@ RefrainMethodCallCollectorTest >> setUp [
 	methodChange := RefrainMethodChange new
 		method: method;
 		commit: commit;
-		oldSourceCode: (RefrainTestsMockClass >> #mockSelect:) sourceCode;
+		oldSourceCode: (RefrainTestsMockClass >> #mockOldSelect:) sourceCode;
 		newSourceCode: (RefrainTestsMockClass >> #mockNewSelect:) sourceCode;
 		yourself.
 ]

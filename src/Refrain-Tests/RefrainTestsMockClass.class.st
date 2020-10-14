@@ -18,7 +18,7 @@ RefrainTestsMockClass >> mockNewSelect: aBlock [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainTestsMockClass >> mockSelect: aBlock [ 
+RefrainTestsMockClass >> mockOldSelect: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection."
 	"(#(1 2 3 4 5) select: #even) >>> #(2 4)"
 	

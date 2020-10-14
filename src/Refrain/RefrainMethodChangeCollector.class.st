@@ -26,6 +26,9 @@ RefrainMethodChangeCollector >> calculateDiffsForCommits: aCollectionOfIceCommit
 				do: [ "Nothing" ] ]
 		displayingProgress: [ :i | i asString, ' / ', aCollectionOfIceCommits size asString ].
 		
+	commit := aCollectionOfIceCommits last.
+	diffs add: (commit diffTo: commit parent).
+	
 	^ diffs
 ]
 
@@ -36,7 +39,7 @@ RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommit t
 	oldestIceCommit := self iceCommitFromSha: anOldestCommit sha.
 	newestIceCommit := self iceCommitFromSha: aNewestCommit sha.
 	
-	commits := self loadIceCommitsFrom: newestIceCommit to: oldestIceCommit.
+	commits := self loadIceCommitsFrom: oldestIceCommit to: newestIceCommit.
 	diffs := self calculateDiffsForCommits: commits.
 	
 	^ self extractMethodChangesFromDiffs: diffs.
@@ -50,8 +53,8 @@ RefrainMethodChangeCollector >> extractMethodChangesFromDiff: aDiff [
 	^ methodOperations
 		select: [ :each | each isMethodChange ]
 		thenCollect: [ :each |
-			each asMethodChange
-				commit: aDiff sourceVersion asMrCommit;
+			each asRefrainMethodChange
+				commit: aDiff sourceVersion asRefrainCommit;
 				yourself. ].
 ]
 
@@ -95,13 +98,13 @@ RefrainMethodChangeCollector >> loadIceCommitsFrom: anOldestIceCommit to: aNewes
 	| commits commitWalk |
 	
 	commitWalk := (IceLibgitCommitWalk forRepository: repository)
-		fromCommit: anOldestIceCommit;
-		uptoCommit: aNewestIceCommit;
+		fromCommit: aNewestIceCommit;
+		uptoCommit: anOldestIceCommit;
 		yourself.
 		
 	commits := OrderedCollection new.
 	commitWalk commitsDo: [ :commit | commits add: commit ].
-	commits add: aNewestIceCommit.
+	commits add: anOldestIceCommit.
 	
-	^ commits
+	^ commits reversed
 ]
