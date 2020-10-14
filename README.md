@@ -1,7 +1,7 @@
 # Refrain
 
 [![Build Status](https://travis-ci.org/olekscode/Refrain.svg?branch=master)](https://travis-ci.org/olekscode/Refrain)
-[![Build status](https://ci.appveyor.com/api/projects/status/t7lxsakunjyl0dan?svg=true)](https://ci.appveyor.com/project/olekscode/refrain)
+[![Build status](https://ci.appveyor.com/api/projects/status/89vqb46105kxi3lb?svg=true)](https://ci.appveyor.com/project/olekscode/refrain)
 [![Coverage Status](https://coveralls.io/repos/github/olekscode/Refrain/badge.svg?branch=master)](https://coveralls.io/github/olekscode/Refrain?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/olekscode/Refrain/master/LICENSE)
 
