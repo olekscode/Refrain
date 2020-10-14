@@ -21,7 +21,7 @@ RefrainAprioriChangeMock >> commit1 [
 		sha: '84ed7471d4a6c0f5c070a6bfe8ab3371f0188035';
 		message: 'Fixed a bug';
 		author: 'olekscode';
-		datetime: '27 April 2020, 16:53:12 CEST' asDateAndTime;
+		datetime: '27 April 2020, 14:53:12+00:00' asDateAndTime;
 		yourself.
 ]
 
@@ -31,7 +31,7 @@ RefrainAprioriChangeMock >> commit2 [
 		sha: '57acf893b567393fec7967f0c32306fccda9321d';
 		message: 'Fixed a bug';
 		author: 'Oleksandr Zaitsev';
-		datetime: '26 August 2020, 20:41:40 CEST' asDateAndTime;
+		datetime: '26 August 2020, 18:41:40+00:00' asDateAndTime;
 		yourself.
 ]
 
