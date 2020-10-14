@@ -14,6 +14,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Refrain class >> repositoryName: aRepositoryName branchName: aBranchName firstCommit: aFirstCommit lastCommit: aLastCommit [
+	^ self new
+		repositoryName: aRepositoryName;
+		branchName: aBranchName;
+		firstCommit: aFirstCommit;
+		lastCommit: aLastCommit;
+		yourself.
+]
+
+{ #category : #'as yet unclassified' }
 Refrain >> branchName: aString [
 	branch := repository branchNamed: 'master'.
 ]
