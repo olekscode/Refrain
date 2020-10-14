@@ -9,6 +9,15 @@
 
 In music and poetry, [_"refrain"_](https://en.wikipedia.org/wiki/Refrain) is the repetive phrase or verse, for example, a chorus of a song or repetitive lines in a poem.
 
+> O Captain! my Captain! our fearful trip is done,  
+The ship has weather’d every rack, the prize we sought is won,  
+...  
+O Captain! my Captain! rise up and hear the bells;  
+Rise up—for you the flag is flung—for you the bugle trills,  
+...
+
+&mdash; _extract from [O Captain! My Captain!](https://www.poetryfoundation.org/poems/45474/o-captain-my-captain) by Walt Whitman_
+
 ## How to install it?
 
 To install Refrain, go to the Playground (Ctrl+OW) in your [Pharo](https://pharo.org/) image and execute the following Metacello script (select it and press Do-it button or Ctrl+D):
