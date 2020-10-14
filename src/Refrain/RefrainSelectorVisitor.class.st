@@ -1,14 +1,14 @@
 Class {
-	#name : #RefrainMethodCallVisitor,
+	#name : #RefrainSelectorVisitor,
 	#superclass : #RefrainVisitor,
 	#category : #'Refrain-Controllers'
 }
 
 { #category : #visiting }
-RefrainMethodCallVisitor >> visitMessageNode: aNode [
+RefrainSelectorVisitor >> visitMessageNode: aNode [
 	| methodCall |
 	
-	methodCall := RefrainMethodCall new
+	methodCall := RefrainSelectorEntity new
 		selector: aNode selector;
 		yourself.
 		

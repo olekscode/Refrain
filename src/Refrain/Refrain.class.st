@@ -8,10 +8,16 @@ Class {
 		'lastCommit',
 		'minNumberOfRepetitions',
 		'methodChanges',
-		'associationRules'
+		'associationRules',
+		'entityCollectingVisitorClass'
 	],
 	#category : #'Refrain-Controllers'
 }
+
+{ #category : #'as yet unclassified' }
+Refrain class >> defaultEntityCollectingVisitorClass [
+	^ RefrainSelectorVisitor
+]
 
 { #category : #'as yet unclassified' }
 Refrain class >> repositoryName: aRepositoryName branchName: aBranchName firstCommit: aFirstCommit lastCommit: aLastCommit [
@@ -23,14 +29,30 @@ Refrain class >> repositoryName: aRepositoryName branchName: aBranchName firstCo
 		yourself.
 ]
 
+{ #category : #accessing }
+Refrain >> associationRules [
+	^ associationRules
+]
+
 { #category : #'as yet unclassified' }
 Refrain >> branchName: aString [
 	branch := repository branchNamed: 'master'.
 ]
 
 { #category : #accessing }
+Refrain >> entityCollectingVisitorClass: aVisitorClass [
+	entityCollectingVisitorClass := aVisitorClass
+]
+
+{ #category : #accessing }
 Refrain >> firstCommit: anObject [
 	firstCommit := anObject
+]
+
+{ #category : #initialization }
+Refrain >> initialize [ 
+	super initialize.
+	entityCollectingVisitorClass := self class defaultEntityCollectingVisitorClass. 
 ]
 
 { #category : #accessing }
@@ -50,10 +72,15 @@ Refrain >> loadMethodChanges [
 		collectMethodChangesFromCommit: firstCommit
 		toCommit: lastCommit.
 		
-	methodCallCollector := RefrainEntityCollector new.
+	methodCallCollector := RefrainEntityCollector usingVisitorClass: entityCollectingVisitorClass.
 	
 	methodChanges do: [ :change |
 		methodCallCollector extractAddedAndDeletedEntitiesFrom: change ].
+]
+
+{ #category : #accessing }
+Refrain >> methodChanges [
+	^ methodChanges
 ]
 
 { #category : #accessing }

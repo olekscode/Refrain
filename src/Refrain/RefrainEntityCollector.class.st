@@ -1,15 +1,23 @@
 Class {
 	#name : #RefrainEntityCollector,
 	#superclass : #Object,
+	#instVars : [
+		'visitorClass'
+	],
 	#category : #'Refrain-Controllers'
 }
+
+{ #category : #'as yet unclassified' }
+RefrainEntityCollector class >> usingVisitorClass: aVisitorClass [
+	^ self new visitorClass: aVisitorClass; yourself
+]
 
 { #category : #'as yet unclassified' }
 RefrainEntityCollector >> collectEntitiesFrom: aSourceCode [
 	| ast visitor |
 	ast := RBParser parseMethod: aSourceCode.
+	visitor := visitorClass new.
 	
-	visitor := RefrainMethodCallVisitor new.
 	ast acceptVisitor: visitor.
 	^ visitor collectedEntities
 ]
@@ -27,4 +35,9 @@ RefrainEntityCollector >> extractAddedAndDeletedEntitiesFrom: aMethodChange [
 	aMethodChange addedEntities do: [ :each | each makeAdded ].
 	aMethodChange deletedEntities do: [ :each | each makeDeleted ].
 	
+]
+
+{ #category : #accessing }
+RefrainEntityCollector >> visitorClass: aRefrainEntityVisitor [
+	visitorClass := aRefrainEntityVisitor
 ]

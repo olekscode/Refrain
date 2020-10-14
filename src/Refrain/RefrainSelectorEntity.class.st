@@ -1,5 +1,5 @@
 Class {
-	#name : #RefrainMethodCall,
+	#name : #RefrainSelectorEntity,
 	#superclass : #RefrainEntity,
 	#instVars : [
 		'selector'
@@ -8,30 +8,27 @@ Class {
 }
 
 { #category : #comparing }
-RefrainMethodCall >> = anObject [
-	anObject class = self class
-		ifFalse: [ ^ false ].
-		
+RefrainSelectorEntity >> = anObject [
 	^ super = anObject and: [
 		anObject selector = selector ]
 ]
 
 { #category : #comparing }
-RefrainMethodCall >> hash [ 
+RefrainSelectorEntity >> hash [ 
 	^ super hash bitXor: selector hash
 ]
 
 { #category : #printing }
-RefrainMethodCall >> printOn: aStream [
+RefrainSelectorEntity >> printOn: aStream [
 	aStream nextPutAll: selector.
 ]
 
 { #category : #accessing }
-RefrainMethodCall >> selector [
+RefrainSelectorEntity >> selector [
 	^ selector
 ]
 
 { #category : #accessing }
-RefrainMethodCall >> selector: anObject [
+RefrainSelectorEntity >> selector: anObject [
 	selector := anObject
 ]

@@ -43,27 +43,27 @@ RefrainMethodChangeTest >> setUp [
 		datetime: '11-21-2020' asDateAndTime;
 		yourself.	
 	
-	call1 := RefrainMethodCall new
+	call1 := RefrainSelectorEntity new
 		selector: #add:;
 		makeAdded;
 		yourself.
 		
-	call2 := RefrainMethodCall new
+	call2 := RefrainSelectorEntity new
 		selector: #insert:;
 		makeDeleted;
 		yourself.
 		
-	call3 := RefrainMethodCall new 
+	call3 := RefrainSelectorEntity new 
 		selector: #remove:;
 		makeAdded;
 		yourself.
 		
-	call4 := RefrainMethodCall new 
+	call4 := RefrainSelectorEntity new 
 		selector: #delete:;
 		makeDeleted;
 		yourself.
 		
-	call5 := RefrainMethodCall new
+	call5 := RefrainSelectorEntity new
 		selector: #sum;
 		makeAdded;
 		yourself.

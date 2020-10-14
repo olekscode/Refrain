@@ -1,5 +1,5 @@
 Class {
-	#name : #RefrainMethodCallTest,
+	#name : #RefrainSelectorEntityTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'call1',
@@ -12,40 +12,40 @@ Class {
 }
 
 { #category : #running }
-RefrainMethodCallTest >> setUp [
+RefrainSelectorEntityTest >> setUp [
 	super setUp.
 	
-	call1 := RefrainMethodCall new 
+	call1 := RefrainSelectorEntity new 
 		selector: #collect:;
 		makeAdded;
 		yourself.
 		
 	"Same as call1"
-	call2 := RefrainMethodCall new 
+	call2 := RefrainSelectorEntity new 
 		selector: #collect:;
 		makeAdded;
 		yourself.
 		
 	"Different selector"
-	call3 := RefrainMethodCall new 
+	call3 := RefrainSelectorEntity new 
 		selector: #isEmpty;
 		makeAdded;
 		yourself.
 		
 	"Different isAdded"
-	call4 := RefrainMethodCall new 
+	call4 := RefrainSelectorEntity new 
 		selector: #collect:;
 		makeDeleted;
 		yourself.
 		
 	"Empty isAdded"
-	call5 := RefrainMethodCall new 
+	call5 := RefrainSelectorEntity new 
 		selector: #collect:;
 		yourself.
 ]
 
 { #category : #tests }
-RefrainMethodCallTest >> testEquality [ 
+RefrainSelectorEntityTest >> testEquality [ 
 	self assert: call2 equals: call1.
 	self deny: call3 equals: call1.
 	self deny: call4 equals: call1.
@@ -53,7 +53,7 @@ RefrainMethodCallTest >> testEquality [
 ]
 
 { #category : #tests }
-RefrainMethodCallTest >> testHash [
+RefrainSelectorEntityTest >> testHash [
 	self assert: call2 hash equals: call1 hash.
 	self deny: call3 hash equals: call1 hash.
 	self deny: call4 hash equals: call1 hash.
@@ -61,7 +61,7 @@ RefrainMethodCallTest >> testHash [
 ]
 
 { #category : #tests }
-RefrainMethodCallTest >> testSet [
+RefrainSelectorEntityTest >> testSet [
 	| set |
 	set := { call1 . call2 . call3 . call4 . call5 } asSet.
 	

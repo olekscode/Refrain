@@ -1,20 +1,20 @@
 Class {
-	#name : #RefrainMethodCallVisitorTest,
+	#name : #RefrainSelectorVisitorTest,
 	#superclass : #TestCase,
 	#category : #'Refrain-Tests-Controllers'
 }
 
 { #category : #tests }
-RefrainMethodCallVisitorTest >> testAcceptVisitor [
+RefrainSelectorVisitorTest >> testAcceptVisitor [
 	| method visitor expectedMethodCalls |
 	method := RefrainMethodsMock >> #mockOldSelect:.
-	visitor := RefrainMethodCallVisitor new.
+	visitor := RefrainSelectorVisitor new.
 	
 	method ast acceptVisitor: visitor.
 	
 	expectedMethodCalls := { #copyEmpty . #do: . #ifTrue: . #value: . #add: } asSet
 		collect: [ :selector |
-			RefrainMethodCall new
+			RefrainSelectorEntity new
 				selector: selector;
 				yourself ].
 			

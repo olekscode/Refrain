@@ -53,7 +53,7 @@ RefrainAprioriChangeMock >> method2 [
 
 { #category : #'as yet unclassified' }
 RefrainAprioriChangeMock >> methodCall1 [
-	^ RefrainMethodCall new
+	^ RefrainSelectorEntity new
 		selector: #metrics;
 		makeDeleted;
 		yourself.
@@ -61,7 +61,7 @@ RefrainAprioriChangeMock >> methodCall1 [
 
 { #category : #'as yet unclassified' }
 RefrainAprioriChangeMock >> methodCall2 [
-	^ RefrainMethodCall new
+	^ RefrainSelectorEntity new
 		selector: #metricValues;
 		makeAdded;
 		yourself.
