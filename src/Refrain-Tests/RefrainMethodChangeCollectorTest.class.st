@@ -20,7 +20,5 @@ RefrainMethodChangeCollectorTest >> testCollectMethodChangesFromCommitToCommit [
 		collectMethodChangesFromCommit: mock commit1
 		toCommit: mock commit2.
 	
-	self assert: actualMethodChanges first equals: expectedMethodChanges first.
-	self assert: actualMethodChanges second equals: expectedMethodChanges second.
 	self assert: actualMethodChanges equals: expectedMethodChanges.
 ]
