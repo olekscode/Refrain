@@ -45,10 +45,10 @@ If you are new to baselines and Metacello, check out the [Baselines](https://git
 
 ```Smalltalk
 refrain := Refrain
-  repositoryName: 'APriori'
-	branchName: 'master'
-	firstCommit: '84ed7471d4a6c0f5c070a6bfe8ab3371f0188035'
-	lastCommit: '57acf893b567393fec7967f0c32306fccda9321d'.
+   repositoryName: 'APriori'
+   branchName: 'master'
+   firstCommit: '84ed7471d4a6c0f5c070a6bfe8ab3371f0188035'
+   lastCommit: '57acf893b567393fec7967f0c32306fccda9321d'.
 
 refrain minNumberOfRepetitions: 2.
 refrain mineRepetitiveChanges.
