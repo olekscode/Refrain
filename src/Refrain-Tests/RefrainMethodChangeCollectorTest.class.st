@@ -17,8 +17,8 @@ RefrainMethodChangeCollectorTest >> testCollectMethodChangesFromCommitToCommit [
 	expectedMethodChanges := mock methodChanges.
 	
 	actualMethodChanges := collector
-		collectMethodChangesFromCommit: mock commit1
-		toCommit: mock commit2.
+		collectMethodChangesFromCommit: mock commit1 sha
+		toCommit: mock commit2 sha.
 	
 	self assert: actualMethodChanges equals: expectedMethodChanges.
 ]

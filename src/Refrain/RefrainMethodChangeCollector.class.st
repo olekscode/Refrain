@@ -33,11 +33,11 @@ RefrainMethodChangeCollector >> calculateDiffsForCommits: aCollectionOfIceCommit
 ]
 
 { #category : #public }
-RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommit toCommit: aNewestCommit [
+RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommitSha toCommit: aNewestCommitSha [
 	| oldestIceCommit newestIceCommit commits diffs |
 	
-	oldestIceCommit := self iceCommitFromSha: anOldestCommit sha.
-	newestIceCommit := self iceCommitFromSha: aNewestCommit sha.
+	oldestIceCommit := self iceCommitFromSha: anOldestCommitSha.
+	newestIceCommit := self iceCommitFromSha: aNewestCommitSha.
 	
 	commits := self loadIceCommitsFrom: oldestIceCommit to: newestIceCommit.
 	diffs := self calculateDiffsForCommits: commits.
