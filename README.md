@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/olekscode/Refrain/badge.svg?branch=master)](https://coveralls.io/github/olekscode/Refrain?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/olekscode/Refrain/master/LICENSE)
 
-**Refrain** is a tool for mining repetitive changes from the commit history of Pharo projects. It is based on the [A-Priori](https://github.com/pharo-ai/APriori) algorithm which goes through the change history of a given project and identifies all possible subsets of co-occuring changes that appear at least N times. For example, if method call to `doWithIndex:` was repetitively replaced with a call to `withIndexDo:` then Refrain will identify `#doWithIndex: ->  #withIndexDo:` as a repetitive change.
+**Refrain** is a tool for mining repetitive changes from the commit history of [Pharo](https://pharo.org/) projects. It is based on the [A-Priori](https://github.com/pharo-ai/APriori) algorithm which goes through the change history of a given project and identifies all possible subsets of co-occuring changes that appear at least N times. For example, if method call to `doWithIndex:` was repetitively replaced with a call to `withIndexDo:` then Refrain will identify `#doWithIndex: ->  #withIndexDo:` as a repetitive change.
 
 In music and poetry, [_"refrain"_](https://en.wikipedia.org/wiki/Refrain) is the repetive phrase or verse, for example, a chorus of a song or repetitive lines in a poem.
 
