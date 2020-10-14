@@ -73,8 +73,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Same as change1"
@@ -83,8 +83,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Different method"
@@ -93,8 +93,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Different commit"
@@ -103,8 +103,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit2;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Different oldSourceCode"
@@ -113,8 +113,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '3 * 5 asFloat';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Different newSourceCode"
@@ -123,8 +123,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '5 minus: 4';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Different addedMethodCalls"
@@ -133,8 +133,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call5 };
-		deletedMethodCalls: { call2 };
+		addedEntities: { call1 . call5 };
+		deletedEntities: { call2 };
 		yourself.
 		
 	"Different deletedMethodCalls"
@@ -143,8 +143,8 @@ RefrainMethodChangeTest >> setUp [
 		commit: commit1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
-		addedMethodCalls: { call1 . call3 };
-		deletedMethodCalls: { call4 };
+		addedEntities: { call1 . call3 };
+		deletedEntities: { call4 };
 		yourself.
 ]
 

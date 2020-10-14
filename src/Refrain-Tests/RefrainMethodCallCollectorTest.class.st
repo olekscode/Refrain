@@ -34,11 +34,11 @@ RefrainMethodCallCollectorTest >> setUp [
 ]
 
 { #category : #tests }
-RefrainMethodCallCollectorTest >> testExtractAddedAndDeletedMethodCallsFrom [
+RefrainMethodCallCollectorTest >> testExtractAddedAndDeletedEntitiesFrom [
 	| collector expectedDeletedMethodCalls expectedAddedMethodCalls |
 	
-	collector := RefrainMethodCallCollector new.
-	collector extractAddedAndDeletedMethodCallsFrom: methodChange.
+	collector := RefrainEntityCollector new.
+	collector extractAddedAndDeletedEntitiesFrom: methodChange.
 	
 	expectedDeletedMethodCalls := { #ifTrue: } asSet
 		collect: [ :selector |
@@ -54,8 +54,8 @@ RefrainMethodCallCollectorTest >> testExtractAddedAndDeletedMethodCallsFrom [
 				makeAdded;
 				yourself ].
 			
-	self assert: methodChange deletedMethodCalls equals: expectedDeletedMethodCalls.
-	self assert: methodChange addedMethodCalls equals: expectedAddedMethodCalls.
+	self assert: methodChange deletedEntities equals: expectedDeletedMethodCalls.
+	self assert: methodChange addedEntities equals: expectedAddedMethodCalls.
 	
 
 ]

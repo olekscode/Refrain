@@ -1,22 +1,8 @@
 Class {
 	#name : #RefrainMethodCallVisitor,
-	#superclass : #RBProgramNodeVisitor,
-	#instVars : [
-		'methodCalls'
-	],
+	#superclass : #RefrainVisitor,
 	#category : #'Refrain-Controllers'
 }
-
-{ #category : #initialization }
-RefrainMethodCallVisitor >> initialize [ 
-	super initialize.
-	methodCalls := OrderedCollection new.
-]
-
-{ #category : #accessing }
-RefrainMethodCallVisitor >> methodCalls [
-	^ methodCalls
-]
 
 { #category : #visiting }
 RefrainMethodCallVisitor >> visitMessageNode: aNode [
@@ -26,6 +12,6 @@ RefrainMethodCallVisitor >> visitMessageNode: aNode [
 		selector: aNode selector;
 		yourself.
 		
-	methodCalls add: methodCall.
+	collectedEntities add: methodCall.
 	super visitMessageNode: aNode.
 ]

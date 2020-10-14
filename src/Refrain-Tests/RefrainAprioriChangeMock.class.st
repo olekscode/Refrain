@@ -90,16 +90,16 @@ RefrainAprioriChangeMock >> methodChange2 [
 { #category : #'as yet unclassified' }
 RefrainAprioriChangeMock >> methodChangeWithCalls1 [
 	^ self methodChange1
-		deletedMethodCalls: { self methodCall1 };
-		addedMethodCalls: { self methodCall2 };
+		deletedEntities: { self methodCall1 };
+		addedEntities: { self methodCall2 };
 		yourself.
 ]
 
 { #category : #'as yet unclassified' }
 RefrainAprioriChangeMock >> methodChangeWithCalls2 [
 	^ self methodChange2
-		deletedMethodCalls: { self methodCall1 };
-		addedMethodCalls: { self methodCall2 };
+		deletedEntities: { self methodCall1 };
+		addedEntities: { self methodCall2 };
 		yourself.
 ]
 

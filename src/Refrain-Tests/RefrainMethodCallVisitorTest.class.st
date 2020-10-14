@@ -12,11 +12,11 @@ RefrainMethodCallVisitorTest >> testAcceptVisitor [
 	
 	method ast acceptVisitor: visitor.
 	
-	expectedMethodCalls := { #copyEmpty . #do: . #ifTrue: . #value: . #add: } asOrderedCollection
+	expectedMethodCalls := { #copyEmpty . #do: . #ifTrue: . #value: . #add: } asSet
 		collect: [ :selector |
 			RefrainMethodCall new
 				selector: selector;
 				yourself ].
 			
-	self assert: visitor methodCalls equals: expectedMethodCalls.
+	self assert: visitor collectedEntities equals: expectedMethodCalls.
 ]

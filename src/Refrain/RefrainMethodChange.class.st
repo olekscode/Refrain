@@ -6,8 +6,8 @@ Class {
 		'commit',
 		'oldSourceCode',
 		'newSourceCode',
-		'addedMethodCalls',
-		'deletedMethodCalls'
+		'addedEntities',
+		'deletedEntities'
 	],
 	#category : #'Refrain-Models'
 }
@@ -21,18 +21,18 @@ RefrainMethodChange >> = anObject [
 		anObject commit = commit and: [ 
 			anObject oldSourceCode = oldSourceCode and: [ 
 				anObject newSourceCode = newSourceCode and: [ 
-					anObject addedMethodCalls = addedMethodCalls and: [ 
-						anObject deletedMethodCalls = deletedMethodCalls ] ] ] ] ]
+					anObject addedEntities = addedEntities and: [ 
+						anObject deletedEntities = deletedEntities ] ] ] ] ]
 ]
 
 { #category : #accessing }
-RefrainMethodChange >> addedMethodCalls [
-	^ addedMethodCalls
+RefrainMethodChange >> addedEntities [
+	^ addedEntities
 ]
 
 { #category : #accessing }
-RefrainMethodChange >> addedMethodCalls: anObject [
-	addedMethodCalls := anObject
+RefrainMethodChange >> addedEntities: anObject [
+	addedEntities := anObject
 ]
 
 { #category : #accessing }
@@ -46,19 +46,19 @@ RefrainMethodChange >> commit: anObject [
 ]
 
 { #category : #accessing }
-RefrainMethodChange >> deletedMethodCalls [
-	^ deletedMethodCalls
+RefrainMethodChange >> deletedEntities [
+	^ deletedEntities
 ]
 
 { #category : #accessing }
-RefrainMethodChange >> deletedMethodCalls: anObject [
-	deletedMethodCalls := anObject
+RefrainMethodChange >> deletedEntities: anObject [
+	deletedEntities := anObject
 ]
 
 { #category : #comparing }
 RefrainMethodChange >> hash [
 	| fields |
-	fields := { method . commit . oldSourceCode . newSourceCode . addedMethodCalls . deletedMethodCalls }.
+	fields := { method . commit . oldSourceCode . newSourceCode . addedEntities . deletedEntities }.
 	
 	^ fields inject: self class hash into: [ :sum :each |
 		sum bitXor: each hash ]

@@ -50,10 +50,10 @@ Refrain >> loadMethodChanges [
 		collectMethodChangesFromCommit: firstCommit
 		toCommit: lastCommit.
 		
-	methodCallCollector := RefrainMethodCallCollector new.
+	methodCallCollector := RefrainEntityCollector new.
 	
 	methodChanges do: [ :change |
-		methodCallCollector extractAddedAndDeletedMethodCallsFrom: change ].
+		methodCallCollector extractAddedAndDeletedEntitiesFrom: change ].
 ]
 
 { #category : #accessing }

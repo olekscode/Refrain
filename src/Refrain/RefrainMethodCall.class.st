@@ -1,53 +1,24 @@
 Class {
 	#name : #RefrainMethodCall,
-	#superclass : #Object,
+	#superclass : #RefrainEntity,
 	#instVars : [
-		'selector',
-		'isAdded'
+		'selector'
 	],
 	#category : #'Refrain-Models'
 }
-
-{ #category : #comparing }
-RefrainMethodCall >> < anObject [
-	anObject class = self class
-		ifFalse: [ ^ false ].
-		
-	^ selector < anObject selector
-]
 
 { #category : #comparing }
 RefrainMethodCall >> = anObject [
 	anObject class = self class
 		ifFalse: [ ^ false ].
 		
-	^ anObject selector = selector and: [
-		anObject isAdded = isAdded ]
+	^ super = anObject and: [
+		anObject selector = selector ]
 ]
 
 { #category : #comparing }
 RefrainMethodCall >> hash [ 
-	^ selector hash bitXor: isAdded hash
-]
-
-{ #category : #accessing }
-RefrainMethodCall >> isAdded [
-	^ isAdded
-]
-
-{ #category : #accessing }
-RefrainMethodCall >> isDeleted [
-	^ isAdded not
-]
-
-{ #category : #accessing }
-RefrainMethodCall >> makeAdded [
-	isAdded := true
-]
-
-{ #category : #accessing }
-RefrainMethodCall >> makeDeleted [
-	isAdded := false
+	^ super hash bitXor: selector hash
 ]
 
 { #category : #printing }

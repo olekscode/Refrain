@@ -43,6 +43,6 @@ RefrainAprioriMiner >> mineRulesFromMethodChanges: aCollectionOfMethodChanges wi
 { #category : #'as yet unclassified' }
 RefrainAprioriMiner >> transactionsFromMethodChanges: aCollectionOfMethodChanges [
 	^ aCollectionOfMethodChanges
-		select: [ :each | each addedMethodCalls isNotEmpty and: [ each deletedMethodCalls isNotEmpty ] ]
-		thenCollect: [ :each | (each addedMethodCalls union: each deletedMethodCalls) asItemset ].
+		select: [ :each | each addedEntities isNotEmpty and: [ each deletedEntities isNotEmpty ] ]
+		thenCollect: [ :each | (each addedEntities union: each deletedEntities) asItemset ].
 ]
