@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 RefrainMethodCallVisitorTest >> testAcceptVisitor [
 	| method visitor expectedMethodCalls |
-	method := RefrainTestsMockClass >> #mockOldSelect:.
+	method := RefrainMethodsMock >> #mockOldSelect:.
 	visitor := RefrainMethodCallVisitor new.
 	
 	method ast acceptVisitor: visitor.

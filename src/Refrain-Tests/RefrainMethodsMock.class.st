@@ -1,11 +1,17 @@
 Class {
-	#name : #RefrainTestsMockClass,
+	#name : #RefrainMethodsMock,
 	#superclass : #Object,
+	#instVars : [
+		'associationRuleMetrics',
+		'associationRules',
+		'itemsetMetrics',
+		'frequentItemsets'
+	],
 	#category : #'Refrain-Tests-Mocks'
 }
 
-{ #category : #'as yet unclassified' }
-RefrainTestsMockClass >> mockNewSelect: aBlock [ 
+{ #category : #enumerating }
+RefrainMethodsMock >> mockNewSelect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection."
 	"(#(1 2 3 4 5) select: #even) >>> #(2 4)"
 	
@@ -17,8 +23,8 @@ RefrainTestsMockClass >> mockNewSelect: aBlock [
 	^newCollection
 ]
 
-{ #category : #'as yet unclassified' }
-RefrainTestsMockClass >> mockOldSelect: aBlock [ 
+{ #category : #enumerating }
+RefrainMethodsMock >> mockOldSelect: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection."
 	"(#(1 2 3 4 5) select: #even) >>> #(2 4)"
 	
