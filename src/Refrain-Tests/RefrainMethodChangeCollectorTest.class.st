@@ -19,8 +19,6 @@ RefrainMethodChangeCollectorTest >> testCollectMethodChangesFromCommitToCommit [
 	actualMethodChanges := collector
 		collectMethodChangesFromCommit: mock commit1
 		toCommit: mock commit2.
-		
-	self assert: actualMethodChanges first commit datetime equals: expectedMethodChanges first commit datetime.
 	
 	self assert: actualMethodChanges equals: expectedMethodChanges.
 ]
