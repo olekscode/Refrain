@@ -12,9 +12,13 @@ BaselineOfRefrain >> baseline: spec [
 		spec
 			baseline: 'APriori'
 			with: [ spec repository: 'github://pharo-ai/APriori/src' ].
+			
+		spec
+  			baseline: 'Clio'
+  			with: [ spec repository: 'github://olekscode/Clio/src' ].
 				
 		"Packages"
 		spec 
-			package: 'Refrain' with: [ spec requires: #('APriori') ];
+			package: 'Refrain' with: [ spec requires: #('APriori' 'Clio') ];
 			package: 'Refrain-Tests' with: [ spec requires: #('Refrain') ] ]
 ]
