@@ -36,7 +36,7 @@ Refrain >> associationRules [
 
 { #category : #'as yet unclassified' }
 Refrain >> branchName: aString [
-	branch := repository branchNamed: 'master'.
+	branch := repository branchNamed: aString.
 ]
 
 { #category : #accessing }
