@@ -1,33 +1,33 @@
 Class {
 	#name : #RefrainEntityCollector,
 	#superclass : #Object,
-	#instVars : [
-		'visitorClass'
-	],
 	#category : #'Refrain-Controllers'
 }
 
 { #category : #'as yet unclassified' }
-RefrainEntityCollector class >> usingVisitorClass: aVisitorClass [
-	^ self new visitorClass: aVisitorClass; yourself
+RefrainEntityCollector >> collectEntitiesFromCode: aSourceCode usingVisitor: aVisitor [
+	| ast |
+	ast := RBParser parseMethod: aSourceCode.
+	ast acceptVisitor: aVisitor.
+	^ aVisitor collectedEntities
 ]
 
 { #category : #'as yet unclassified' }
-RefrainEntityCollector >> collectEntitiesFrom: aSourceCode [
-	| ast visitor |
-	ast := RBParser parseMethod: aSourceCode.
-	visitor := visitorClass new.
-	
-	ast acceptVisitor: visitor.
-	^ visitor collectedEntities
+RefrainEntityCollector >> collectEntitiesFromNewCode: aSourceCode [
+	self subclassResponsibility
+]
+
+{ #category : #'as yet unclassified' }
+RefrainEntityCollector >> collectEntitiesFromOldCode: aSourceCode [
+	self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
 RefrainEntityCollector >> extractAddedAndDeletedEntitiesFrom: aMethodChange [
 	| oldEntities newEntities |
 	
-	oldEntities := self collectEntitiesFrom: aMethodChange oldSourceCode.
-	newEntities := self collectEntitiesFrom: aMethodChange newSourceCode.
+	oldEntities := self collectEntitiesFromOldCode: aMethodChange oldSourceCode.
+	newEntities := self collectEntitiesFromNewCode: aMethodChange newSourceCode.
 	
 	aMethodChange addedEntities: (newEntities difference: oldEntities).
 	aMethodChange deletedEntities: (oldEntities difference: newEntities).
@@ -35,9 +35,4 @@ RefrainEntityCollector >> extractAddedAndDeletedEntitiesFrom: aMethodChange [
 	aMethodChange addedEntities do: [ :each | each makeAdded ].
 	aMethodChange deletedEntities do: [ :each | each makeDeleted ].
 	
-]
-
-{ #category : #accessing }
-RefrainEntityCollector >> visitorClass: aRefrainEntityVisitor [
-	visitorClass := aRefrainEntityVisitor
 ]

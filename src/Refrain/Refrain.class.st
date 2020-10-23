@@ -8,15 +8,15 @@ Class {
 		'lastCommit',
 		'minNumberOfRepetitions',
 		'methodChanges',
-		'associationRules',
-		'entityCollectingVisitorClass'
+		'entityCollector',
+		'rules'
 	],
 	#category : #'Refrain-Controllers'
 }
 
 { #category : #'as yet unclassified' }
-Refrain class >> defaultEntityCollectingVisitorClass [
-	^ RefrainSelectorVisitor
+Refrain class >> defaultEntityCollectoClass [
+	^ RefrainSelectorCollector
 ]
 
 { #category : #'as yet unclassified' }
@@ -29,19 +29,14 @@ Refrain class >> repositoryName: aRepositoryName branchName: aBranchName firstCo
 		yourself.
 ]
 
-{ #category : #accessing }
-Refrain >> associationRules [
-	^ associationRules
-]
-
 { #category : #'as yet unclassified' }
 Refrain >> branchName: aString [
 	branch := repository branchNamed: aString.
 ]
 
 { #category : #accessing }
-Refrain >> entityCollectingVisitorClass: aVisitorClass [
-	entityCollectingVisitorClass := aVisitorClass
+Refrain >> entityCollector: aRefrainEntityCollector [
+	entityCollector := aRefrainEntityCollector
 ]
 
 { #category : #accessing }
@@ -50,9 +45,9 @@ Refrain >> firstCommit: anObject [
 ]
 
 { #category : #initialization }
-Refrain >> initialize [ 
+Refrain >> initialize [
 	super initialize.
-	entityCollectingVisitorClass := self class defaultEntityCollectingVisitorClass. 
+	entityCollector := self class defaultEntityCollectoClass new.
 ]
 
 { #category : #accessing }
@@ -62,7 +57,7 @@ Refrain >> lastCommit: anObject [
 
 { #category : #'as yet unclassified' }
 Refrain >> loadMethodChanges [
-	| methodChangeCollector methodCallCollector |
+	| methodChangeCollector |
 	
 	methodChangeCollector := RefrainMethodChangeCollector
 		forRepository: repository
@@ -71,11 +66,9 @@ Refrain >> loadMethodChanges [
 	methodChanges := methodChangeCollector
 		collectMethodChangesFromCommit: firstCommit
 		toCommit: lastCommit.
-		
-	methodCallCollector := RefrainEntityCollector usingVisitorClass: entityCollectingVisitorClass.
 	
 	methodChanges do: [ :change |
-		methodCallCollector extractAddedAndDeletedEntitiesFrom: change ].
+		entityCollector extractAddedAndDeletedEntitiesFrom: change ].
 ]
 
 { #category : #accessing }
@@ -92,18 +85,18 @@ Refrain >> minNumberOfRepetitions: anObject [
 Refrain >> mineRepetitiveChanges [
 	self loadMethodChanges.
 	self mineRules.
-	^ associationRules
+	^ rules
 ]
 
 { #category : #'as yet unclassified' }
 Refrain >> mineRules [
-	| aprioriMiner |
+	| miner |
 
-	aprioriMiner := RefrainAprioriMiner new.
+	miner := RefrainMiner new.
 	
-	associationRules := aprioriMiner
-		mineRulesFromMethodChanges: methodChanges
-		withMinCount: minNumberOfRepetitions.
+	rules := miner
+		mineRulesFrom: methodChanges
+		withMinNumberOfRepetitions: minNumberOfRepetitions.
 		
 	self sortRules.
 ]
@@ -114,10 +107,15 @@ Refrain >> repositoryName: aString [
 		repo isValid and: [ repo name = aString ] ].
 ]
 
+{ #category : #accessing }
+Refrain >> rules [
+	^ rules
+]
+
 { #category : #sorting }
 Refrain >> sortRules [
 	"Sort first by lift then by confidence then by count"
-	associationRules sort: [ :a :b |
+	rules sort: [ :a :b |
 		a lift > b lift or: [ 
 			a lift = b lift and: [ a confidence > b confidence or: [ 
 				a confidence = b confidence and: [ a count > b count ] ] ] ] ].

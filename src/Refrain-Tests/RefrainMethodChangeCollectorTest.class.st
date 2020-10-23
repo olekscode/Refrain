@@ -8,7 +8,7 @@ Class {
 RefrainMethodChangeCollectorTest >> testCollectMethodChangesFromCommitToCommit [
 	| mock collector expectedMethodChanges actualMethodChanges |
 	
-	mock := RefrainAprioriChangeMock new.
+	mock := RefrainMethodChangeMock new.
 	
 	collector := RefrainMethodChangeCollector
 		forRepository: mock repository

@@ -1,5 +1,5 @@
 Class {
-	#name : #RefrainEntityCollectorTest,
+	#name : #RefrainSelectorCollectorTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'methodChange'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #running }
-RefrainEntityCollectorTest >> setUp [
+RefrainSelectorCollectorTest >> setUp [
 	| method commit |
 	super setUp.
 	
@@ -34,10 +34,10 @@ RefrainEntityCollectorTest >> setUp [
 ]
 
 { #category : #tests }
-RefrainEntityCollectorTest >> testExtractAddedAndDeletedEntitiesFrom [
+RefrainSelectorCollectorTest >> testExtractAddedAndDeletedEntitiesFrom [
 	| collector expectedDeletedMethodCalls expectedAddedMethodCalls |
 	
-	collector := RefrainEntityCollector usingVisitorClass: RefrainSelectorVisitor.
+	collector := RefrainSelectorCollector new.
 	collector extractAddedAndDeletedEntitiesFrom: methodChange.
 	
 	expectedDeletedMethodCalls := { #ifTrue: } asSet

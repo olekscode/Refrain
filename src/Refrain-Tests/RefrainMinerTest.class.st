@@ -1,5 +1,5 @@
 Class {
-	#name : #RefrainAprioriMinerTest,
+	#name : #RefrainMinerTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'methodChange'
@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #tests }
-RefrainAprioriMinerTest >> testMineRulesFromMethodChangesWithMinCount [
+RefrainMinerTest >> testMineRulesFromMethodChangesWithMinCount [
 	| miner mock expected actual |
 	
-	miner := RefrainAprioriMiner new.
-	mock := RefrainAprioriChangeMock new.
+	miner := RefrainMiner new.
+	mock := RefrainMethodChangeMock new.
 	
 	expected := OrderedCollection withAll: { 
 		({ mock methodCall1 } asItemset ->
@@ -20,8 +20,8 @@ RefrainAprioriMinerTest >> testMineRulesFromMethodChangesWithMinCount [
 	) asAssociationRule }.
 		
 	actual := miner
-		mineRulesFromMethodChanges: mock methodChangesWithCalls
-		withMinCount: 2.
+		mineRulesFrom: mock methodChangesWithCalls
+		withMinNumberOfRepetitions: 2.
 	
 	self assert: actual equals: expected.
 ]

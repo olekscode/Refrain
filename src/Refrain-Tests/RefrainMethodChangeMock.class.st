@@ -1,5 +1,5 @@
 Class {
-	#name : #RefrainAprioriChangeMock,
+	#name : #RefrainMethodChangeMock,
 	#superclass : #Object,
 	#instVars : [
 		'associationRuleMetrics',
@@ -11,12 +11,12 @@ Class {
 }
 
 { #category : #accessing }
-RefrainAprioriChangeMock >> branch [
+RefrainMethodChangeMock >> branch [
 	^ self repository branchNamed: 'master'.
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> commit1 [
+RefrainMethodChangeMock >> commit1 [
 	^ RefrainCommit new
 		sha: '84ed7471d4a6c0f5c070a6bfe8ab3371f0188035';
 		message: 'Fixed a bug';
@@ -26,7 +26,7 @@ RefrainAprioriChangeMock >> commit1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> commit2 [
+RefrainMethodChangeMock >> commit2 [
 	^ RefrainCommit new
 		sha: '57acf893b567393fec7967f0c32306fccda9321d';
 		message: 'Fixed a bug';
@@ -36,7 +36,7 @@ RefrainAprioriChangeMock >> commit2 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> method1 [
+RefrainMethodChangeMock >> method1 [
 	^ RefrainMethod new
 		className: #APriori;
 		selector: #calculateItemsetMetrics:;
@@ -44,7 +44,7 @@ RefrainAprioriChangeMock >> method1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> method2 [
+RefrainMethodChangeMock >> method2 [
 	^ RefrainMethod new
 		className: #APriori;
 		selector: #calculateAssociationRuleMetrics:;
@@ -52,7 +52,7 @@ RefrainAprioriChangeMock >> method2 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> methodCall1 [
+RefrainMethodChangeMock >> methodCall1 [
 	^ RefrainSelectorEntity new
 		selector: #metrics;
 		makeDeleted;
@@ -60,7 +60,7 @@ RefrainAprioriChangeMock >> methodCall1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> methodCall2 [
+RefrainMethodChangeMock >> methodCall2 [
 	^ RefrainSelectorEntity new
 		selector: #metricValues;
 		makeAdded;
@@ -68,7 +68,7 @@ RefrainAprioriChangeMock >> methodCall2 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> methodChange1 [
+RefrainMethodChangeMock >> methodChange1 [
 	^ RefrainMethodChange new 
 		method: self method1;
 		commit: self commit1;
@@ -78,7 +78,7 @@ RefrainAprioriChangeMock >> methodChange1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> methodChange2 [
+RefrainMethodChangeMock >> methodChange2 [
 	^ RefrainMethodChange new 
 		method: self method2;
 		commit: self commit2;
@@ -88,7 +88,7 @@ RefrainAprioriChangeMock >> methodChange2 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> methodChangeWithCalls1 [
+RefrainMethodChangeMock >> methodChangeWithCalls1 [
 	^ self methodChange1
 		deletedEntities: { self methodCall1 };
 		addedEntities: { self methodCall2 };
@@ -96,7 +96,7 @@ RefrainAprioriChangeMock >> methodChangeWithCalls1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> methodChangeWithCalls2 [
+RefrainMethodChangeMock >> methodChangeWithCalls2 [
 	^ self methodChange2
 		deletedEntities: { self methodCall1 };
 		addedEntities: { self methodCall2 };
@@ -104,21 +104,21 @@ RefrainAprioriChangeMock >> methodChangeWithCalls2 [
 ]
 
 { #category : #accessing }
-RefrainAprioriChangeMock >> methodChanges [
+RefrainMethodChangeMock >> methodChanges [
 	^ OrderedCollection withAll: {
 		self methodChange1 .
 		self methodChange2 }
 ]
 
 { #category : #accessing }
-RefrainAprioriChangeMock >> methodChangesWithCalls [
+RefrainMethodChangeMock >> methodChangesWithCalls [
 	^ OrderedCollection withAll: {
 		self methodChangeWithCalls1 .
 		self methodChangeWithCalls2 }
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> newSourceCode1 [
+RefrainMethodChangeMock >> newSourceCode1 [
 	^ 'calculateItemsetMetrics: aCollectionOfMetricsClasses
 
 	itemsetMetrics := self instantiateMetrics: aCollectionOfMetricsClasses.
@@ -129,7 +129,7 @@ RefrainAprioriChangeMock >> newSourceCode1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> newSourceCode2 [
+RefrainMethodChangeMock >> newSourceCode2 [
 	^ 'calculateAssociationRuleMetrics: aCollectionOfMetricsClasses
 
 	associationRuleMetrics := self instantiateMetrics: aCollectionOfMetricsClasses.
@@ -140,7 +140,7 @@ RefrainAprioriChangeMock >> newSourceCode2 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> oldSourceCode1 [
+RefrainMethodChangeMock >> oldSourceCode1 [
 	^ 'calculateItemsetMetrics: aCollectionOfMetricsClasses
 
 	itemsetMetrics := self instantiateMetrics: aCollectionOfMetricsClasses.
@@ -151,7 +151,7 @@ RefrainAprioriChangeMock >> oldSourceCode1 [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainAprioriChangeMock >> oldSourceCode2 [
+RefrainMethodChangeMock >> oldSourceCode2 [
 	^ 'calculateAssociationRuleMetrics: aCollectionOfMetricsClasses
 
 	associationRuleMetrics := self instantiateMetrics: aCollectionOfMetricsClasses.
@@ -162,7 +162,7 @@ RefrainAprioriChangeMock >> oldSourceCode2 [
 ]
 
 { #category : #accessing }
-RefrainAprioriChangeMock >> repository [
+RefrainMethodChangeMock >> repository [
 	^ IceRepository registry detect: [ :repo |
 		repo isValid and: [ repo name = 'APriori' ] ].
 ]
