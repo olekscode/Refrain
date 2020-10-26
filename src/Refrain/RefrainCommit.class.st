@@ -60,6 +60,14 @@ RefrainCommit >> initialize [
 	tags := OrderedCollection new.
 ]
 
+{ #category : #testing }
+RefrainCommit >> matches: aString [
+	"Answer true if a given string matches this commit's SHA, short SHA, or one of its tags"
+
+	^ self sha = aString or: [ 
+		  self shortSha = aString or: [ self tags includes: aString ] ]
+]
+
 { #category : #accessing }
 RefrainCommit >> message [
 	^ message
