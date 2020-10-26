@@ -8,7 +8,8 @@ Class {
 		'commit4',
 		'commit5',
 		'commit6',
-		'commit7'
+		'commit7',
+		'commit8'
 	],
 	#category : #'Refrain-Tests-Models'
 }
@@ -22,7 +23,8 @@ RefrainCommitTest >> setUp [
 		message: 'Hello world';
 		author: 'Oleksandr Zaitsev';
 		tags: #('1.0.1');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 	
 	"Same as commit1"	
@@ -31,7 +33,8 @@ RefrainCommitTest >> setUp [
 		message: 'Hello world';
 		author: 'Oleksandr Zaitsev';
 		tags: #('1.0.1');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 		
 	"Different sha"
@@ -40,7 +43,8 @@ RefrainCommitTest >> setUp [
 		message: 'Hello world';
 		author: 'Oleksandr Zaitsev';
 		tags: #('1.0.1');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 		
 	"Different message"
@@ -49,7 +53,8 @@ RefrainCommitTest >> setUp [
 		message: 'Lorem ipsum';
 		author: 'Oleksandr Zaitsev';
 		tags: #('1.0.1');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 		
 	"Different author"
@@ -58,7 +63,8 @@ RefrainCommitTest >> setUp [
 		message: 'Hello world';
 		author: 'Stephane Ducasse';
 		tags: #('1.0.1');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 		
 	"Different tags"
@@ -67,16 +73,28 @@ RefrainCommitTest >> setUp [
 		message: 'Hello world';
 		author: 'Oleksandr Zaitsev';
 		tags: #('release' '2.0.0');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 		
-	"Different datetime"
+	"Different date"
 	commit7 := RefrainCommit new
 		sha: '14164de82d938df2cc98186fa0225a49fe7c98e0';
 		message: 'Hello world';
 		author: 'Oleksandr Zaitsev';
 		tags: #('1.0.1');
-		datetime: '11-21-2020' asDateAndTime;
+		date: '11-21-2020' asDate;
+		time: '15:30' asTime;
+		yourself.
+		
+	"Different date"
+	commit8 := RefrainCommit new
+		sha: '14164de82d938df2cc98186fa0225a49fe7c98e0';
+		message: 'Hello world';
+		author: 'Oleksandr Zaitsev';
+		tags: #('1.0.1');
+		date: '11-21-2020' asDate;
+		time: '23:03' asTime;
 		yourself.
 ]
 
@@ -88,6 +106,7 @@ RefrainCommitTest >> testEquality [
 	self deny: commit5 equals: commit1.
 	self deny: commit6 equals: commit1.
 	self deny: commit7 equals: commit1.
+	self deny: commit8 equals: commit1.
 ]
 
 { #category : #tests }
@@ -98,14 +117,15 @@ RefrainCommitTest >> testHash [
 	self deny: commit5 hash equals: commit1 hash.
 	self deny: commit6 hash equals: commit1 hash.
 	self deny: commit7 hash equals: commit1 hash.
+	self deny: commit8 hash equals: commit1 hash.
 ]
 
 { #category : #tests }
 RefrainCommitTest >> testSet [
 	| set |
-	set := { commit1 . commit2 . commit3 . commit4 . commit5 . commit6 . commit7 } asSet.
+	set := { commit1 . commit2 . commit3 . commit4 . commit5 . commit6 . commit7 . commit8 } asSet.
 	
-	self assert: set size equals: 6.
+	self assert: set size equals: 7.
 	self assert: (set includes: commit1).
 	self assert: (set includes: commit2).
 	self assert: (set includes: commit3).
@@ -113,4 +133,5 @@ RefrainCommitTest >> testSet [
 	self assert: (set includes: commit5).
 	self assert: (set includes: commit6).
 	self assert: (set includes: commit7).
+	self assert: (set includes: commit8).
 ]

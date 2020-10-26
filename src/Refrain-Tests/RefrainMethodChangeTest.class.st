@@ -33,14 +33,16 @@ RefrainMethodChangeTest >> setUp [
 		sha: '14164de82d938df2cc98186fa0225a49fe7c98e0';
 		message: 'Hello world';
 		tags: '1.0.1';
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 	
 	commit2 := RefrainCommit new
 		sha: '3206cc82d9991e2acdd10916247c114e1b173e77';
 		message: 'Lorem ipsum';
 		tags: '2.0.0';
-		datetime: '11-21-2020' asDateAndTime;
+		date: '11-21-2020' asDate;
+		time: '23:03' asTime;
 		yourself.	
 	
 	call1 := RefrainSelectorEntity new

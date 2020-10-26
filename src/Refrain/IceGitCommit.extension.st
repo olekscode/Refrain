@@ -6,6 +6,7 @@ IceGitCommit >> asRefrainCommit [
 		sha: self id;
 		message: self comment;
 		author: self author;
-		datetime: self datetime;
+		date: self datetime asDate;
+		time: self datetime asTime;
 		yourself
 ]

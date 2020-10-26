@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'sha',
-		'datetime',
+		'date',
+		'time',
 		'message',
 		'tags',
 		'author'
@@ -19,8 +20,9 @@ RefrainCommit >> = anObject [
 	^ anObject sha = sha and: [ 
 		anObject message = message and: [ 
 			anObject tags = tags and: [ 
-				anObject datetime = datetime and: [ 
-					anObject author = author ] ] ] ]
+				anObject date = date and: [
+					anObject time = time and: [
+						anObject author = author ] ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -34,19 +36,19 @@ RefrainCommit >> author: anObject [
 ]
 
 { #category : #accessing }
-RefrainCommit >> datetime [
-	^ datetime
+RefrainCommit >> date [
+	^ date
 ]
 
 { #category : #accessing }
-RefrainCommit >> datetime: anObject [
-	datetime := anObject
+RefrainCommit >> date: anObject [
+	date := anObject
 ]
 
 { #category : #comparing }
 RefrainCommit >> hash [
 	| fields |
-	fields := { sha . message . tags . datetime . author }.
+	fields := { sha . message . tags . date . time . author }.
 	
 	^ fields inject: self class hash into: [ :sum :each |
 		sum bitXor: each hash ]
@@ -96,4 +98,14 @@ RefrainCommit >> tags [
 { #category : #accessing }
 RefrainCommit >> tags: anObject [
 	tags := anObject
+]
+
+{ #category : #accessing }
+RefrainCommit >> time [
+	^ time
+]
+
+{ #category : #accessing }
+RefrainCommit >> time: anObject [
+	time := anObject
 ]

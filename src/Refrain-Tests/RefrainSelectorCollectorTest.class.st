@@ -22,7 +22,8 @@ RefrainSelectorCollectorTest >> setUp [
 		message: 'Hello world';
 		author: 'Oleksandr Zaitsev';
 		tags: #('1.0.1');
-		datetime: '10-12-2020' asDateAndTime;
+		date: '10-12-2020' asDate;
+		time: '15:30' asTime;
 		yourself.
 	
 	methodChange := RefrainMethodChange new
