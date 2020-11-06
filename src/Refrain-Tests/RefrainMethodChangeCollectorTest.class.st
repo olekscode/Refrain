@@ -11,8 +11,7 @@ RefrainMethodChangeCollectorTest >> testCollectMethodChangesFromCommitToCommit [
 	mock := RefrainMethodChangeMock new.
 	
 	collector := RefrainMethodChangeCollector
-		forRepository: mock repository
-		branch: mock branch.
+		forRepository: mock repository.
 		
 	expectedMethodChanges := mock methodChanges.
 	

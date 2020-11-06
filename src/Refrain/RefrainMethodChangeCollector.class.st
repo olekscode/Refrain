@@ -2,15 +2,14 @@ Class {
 	#name : #RefrainMethodChangeCollector,
 	#superclass : #Object,
 	#instVars : [
-		'repository',
-		'branch'
+		'repository'
 	],
 	#category : #'Refrain-Controllers'
 }
 
 { #category : #'as yet unclassified' }
-RefrainMethodChangeCollector class >> forRepository: aRepository branch: aBranch [
-	^ self new initializeRepository: aRepository branch: aBranch; yourself. 
+RefrainMethodChangeCollector class >> forRepository: aRepository [
+	^ self new initializeRepository: aRepository; yourself. 
 ]
 
 { #category : #private }
@@ -43,6 +42,12 @@ RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommitSh
 	diffs := self calculateDiffsForCommits: commits.
 	
 	^ self extractMethodChangesFromDiffs: diffs.
+]
+
+{ #category : #accessing }
+RefrainMethodChangeCollector >> commits [
+	"All commits of a repository"
+	^ (repository allBranches flatCollect: [ :branch | branch commits ]) asSet.
 ]
 
 { #category : #private }
@@ -81,15 +86,14 @@ RefrainMethodChangeCollector >> extractOperationsFromDiff: aDiff [
 
 { #category : #private }
 RefrainMethodChangeCollector >> iceCommitFromSha: aCommitSha [
-	^ branch commits
+	^ self commits
 		detect: [ :commit | commit id = aCommitSha ]
 		ifNone: [ Error signal: 'Commit with this SHA was not found' ]
 ]
 
 { #category : #initialization }
-RefrainMethodChangeCollector >> initializeRepository: aRepository branch: aBranch [
+RefrainMethodChangeCollector >> initializeRepository: aRepository [
 	repository := aRepository.
-	branch := aBranch.
 	^ self
 ]
 

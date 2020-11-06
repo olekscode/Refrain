@@ -2,12 +2,11 @@ Class {
 	#name : #Refrain,
 	#superclass : #Object,
 	#instVars : [
-		'repository',
-		'branch',
 		'firstCommit',
 		'lastCommit',
 		'minNumberOfRepetitions',
 		'methodChanges',
+		'methodChangeCollector',
 		'entityCollector',
 		'rules'
 	],
@@ -15,23 +14,32 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Refrain class >> defaultEntityCollectoClass [
+Refrain class >> defaultEntityCollectorClass [
 	^ RefrainSelectorCollector
 ]
 
 { #category : #'as yet unclassified' }
-Refrain class >> repositoryName: aRepositoryName branchName: aBranchName firstCommit: aFirstCommit lastCommit: aLastCommit [
+Refrain class >> repository: aRepository firstCommit: aFirstCommit lastCommit: aLastCommit [
 	^ self new
-		repositoryName: aRepositoryName;
-		branchName: aBranchName;
+		repository: aRepository;
 		firstCommit: aFirstCommit;
 		lastCommit: aLastCommit;
 		yourself.
 ]
 
 { #category : #'as yet unclassified' }
-Refrain >> branchName: aString [
-	branch := repository branchNamed: aString.
+Refrain class >> repositoryName: aRepositoryName firstCommit: aFirstCommit lastCommit: aLastCommit [
+	^ self new
+		repositoryName: aRepositoryName;
+		firstCommit: aFirstCommit;
+		lastCommit: aLastCommit;
+		yourself.
+]
+
+{ #category : #accessing }
+Refrain >> commits [
+	"All commits of the repository"
+	^ methodChangeCollector commits
 ]
 
 { #category : #accessing }
@@ -47,7 +55,7 @@ Refrain >> firstCommit: anObject [
 { #category : #initialization }
 Refrain >> initialize [
 	super initialize.
-	entityCollector := self class defaultEntityCollectoClass new.
+	entityCollector := self class defaultEntityCollectorClass new.
 ]
 
 { #category : #accessing }
@@ -56,13 +64,7 @@ Refrain >> lastCommit: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-Refrain >> loadMethodChanges [
-	| methodChangeCollector |
-	
-	methodChangeCollector := RefrainMethodChangeCollector
-		forRepository: repository
-		branch: branch.
-	
+Refrain >> loadMethodChanges [	
 	methodChanges := methodChangeCollector
 		collectMethodChangesFromCommit: firstCommit
 		toCommit: lastCommit.
@@ -101,10 +103,15 @@ Refrain >> mineRules [
 	self sortRules.
 ]
 
+{ #category : #accessing }
+Refrain >> repository: aRepository [
+	methodChangeCollector := RefrainMethodChangeCollector forRepository: aRepository
+]
+
 { #category : #'as yet unclassified' }
 Refrain >> repositoryName: aString [
-	repository := IceRepository registry detect: [ :repo |
-		repo isValid and: [ repo name = aString ] ].
+	self repository: (IceRepository registry detect: [ :repo |
+		repo isValid and: [ repo name = aString ] ]).
 ]
 
 { #category : #accessing }
