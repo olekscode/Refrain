@@ -2,7 +2,7 @@ Class {
 	#name : #RefrainMethodChangeCollector,
 	#superclass : #Object,
 	#instVars : [
-		'repository'
+		'project'
 	],
 	#category : #'Refrain-Controllers'
 }
@@ -47,7 +47,27 @@ RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommitSh
 { #category : #accessing }
 RefrainMethodChangeCollector >> commits [
 	"All commits of a repository"
-	^ (repository allBranches flatCollect: [ :branch | branch commits ]) asSet.
+	^ project commits values
+]
+
+{ #category : #private }
+RefrainMethodChangeCollector >> extractAllCommitsFromRepository [
+	"Extract commits from all branches of a repository"
+	| allCommits |
+	
+	allCommits := (project repository allBranches flatCollect: [ :branch | branch commits ]) asSet.
+	
+	project iceCommits removeAll.
+	project commits removeAll.
+	
+	allCommits do: [ :commit |
+		project iceCommits at: commit id put: commit.
+		project commits at: commit id put: commit asRefrainCommit ].
+	
+	project repository tags do: [ :tag |
+		project commits
+			at: tag commit id
+			ifPresent: [ :commit | commit tags add: tag name ] ].
 ]
 
 { #category : #private }
@@ -86,22 +106,28 @@ RefrainMethodChangeCollector >> extractOperationsFromDiff: aDiff [
 
 { #category : #private }
 RefrainMethodChangeCollector >> iceCommitFromSha: aCommitSha [
-	^ self commits
-		detect: [ :commit | commit id = aCommitSha ]
-		ifNone: [ Error signal: 'Commit with this SHA was not found' ]
+	^ project iceCommits
+		at: aCommitSha
+		ifAbsent: [ Error signal: 'Commit with this SHA was not found' ]
+]
+
+{ #category : #initialization }
+RefrainMethodChangeCollector >> initialize [
+	super initialize.
+	project := RefrainProject new.
 ]
 
 { #category : #initialization }
 RefrainMethodChangeCollector >> initializeRepository: aRepository [
-	repository := aRepository.
-	^ self
+	project repository: aRepository.
+	self extractAllCommitsFromRepository.
 ]
 
 { #category : #private }
 RefrainMethodChangeCollector >> loadIceCommitsFrom: anOldestIceCommit to: aNewestIceCommit [
 	| commits commitWalk |
 	
-	commitWalk := (IceLibgitCommitWalk forRepository: repository)
+	commitWalk := (IceLibgitCommitWalk forRepository: project repository)
 		fromCommit: aNewestIceCommit;
 		uptoCommit: anOldestIceCommit;
 		yourself.
