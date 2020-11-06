@@ -138,3 +138,8 @@ RefrainMethodChangeCollector >> loadIceCommitsFrom: anOldestIceCommit to: aNewes
 	
 	^ commits reversed
 ]
+
+{ #category : #accessing }
+RefrainMethodChangeCollector >> project [ 
+	^ project
+]

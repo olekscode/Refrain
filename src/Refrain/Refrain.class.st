@@ -36,10 +36,9 @@ Refrain class >> repositoryName: aRepositoryName firstCommit: aFirstCommit lastC
 		yourself.
 ]
 
-{ #category : #accessing }
-Refrain >> commits [
-	"All commits of the repository"
-	^ methodChangeCollector commits
+{ #category : #history }
+Refrain >> commitDictionary [
+	^ methodChangeCollector project commits
 ]
 
 { #category : #accessing }
