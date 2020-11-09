@@ -44,12 +44,6 @@ RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommitSh
 	^ self extractMethodChangesFromDiffs: diffs.
 ]
 
-{ #category : #accessing }
-RefrainMethodChangeCollector >> commits [
-	"All commits of a repository"
-	^ project commits values
-]
-
 { #category : #private }
 RefrainMethodChangeCollector >> extractAllCommitsFromRepository [
 	"Extract commits from all branches of a repository"
