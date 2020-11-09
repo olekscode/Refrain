@@ -3,27 +3,20 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'repository',
-		'commits',
-		'iceCommits'
+		'commitDictionary'
 	],
 	#category : #'Refrain-Models'
 }
 
 { #category : #accessing }
-RefrainProject >> commits [
-	^ commits
-]
-
-{ #category : #accessing }
-RefrainProject >> iceCommits [
-	^ iceCommits
+RefrainProject >> commitDictionary [
+	^ commitDictionary
 ]
 
 { #category : #initialization }
 RefrainProject >> initialize [
 	super initialize.
-	commits := Dictionary new.
-	iceCommits := Dictionary new.
+	commitDictionary := Dictionary new.
 ]
 
 { #category : #accessing }

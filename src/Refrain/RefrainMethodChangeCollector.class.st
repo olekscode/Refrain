@@ -47,21 +47,13 @@ RefrainMethodChangeCollector >> collectMethodChangesFromCommit: anOldestCommitSh
 { #category : #private }
 RefrainMethodChangeCollector >> extractAllCommitsFromRepository [
 	"Extract commits from all branches of a repository"
-	| allCommits |
+	| commits |
 	
-	allCommits := (project repository allBranches flatCollect: [ :branch | branch commits ]) asSet.
+	commits := (project repository allBranches flatCollect: [ :branch | branch commits ]) asSet.
+	project commitDictionary removeAll.
 	
-	project iceCommits removeAll.
-	project commits removeAll.
-	
-	allCommits do: [ :commit |
-		project iceCommits at: commit id put: commit.
-		project commits at: commit id put: commit asDepCommit ].
-	
-	project repository tags do: [ :tag |
-		project commits
-			at: tag commit id
-			ifPresent: [ :commit | commit tags add: tag name ] ].
+	commits do: [ :commit |
+		project commitDictionary at: commit id put: commit ].
 ]
 
 { #category : #private }
@@ -100,7 +92,7 @@ RefrainMethodChangeCollector >> extractOperationsFromDiff: aDiff [
 
 { #category : #private }
 RefrainMethodChangeCollector >> iceCommitFromSha: aCommitSha [
-	^ project iceCommits
+	^ project commitDictionary
 		at: aCommitSha
 		ifAbsent: [ Error signal: 'Commit with this SHA was not found' ]
 ]
