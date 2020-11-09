@@ -16,7 +16,7 @@ Class {
 
 { #category : #running }
 RefrainMethodChangeTest >> setUp [
-	| method1 method2 commit1 commit2 call1 call2 call3 call4 call5 |
+	| method1 method2 commitSha1 commitSha2 call1 call2 call3 call4 call5 |
 	super setUp.
 	
 	method1 := RefrainMethod new 
@@ -29,21 +29,8 @@ RefrainMethodChangeTest >> setUp [
 		selector: #new;
 		yourself.
 		
-	commit1 := RefrainCommit new
-		sha: '14164de82d938df2cc98186fa0225a49fe7c98e0';
-		message: 'Hello world';
-		tags: '1.0.1';
-		date: '10-12-2020' asDate;
-		time: '15:30' asTime;
-		yourself.
-	
-	commit2 := RefrainCommit new
-		sha: '3206cc82d9991e2acdd10916247c114e1b173e77';
-		message: 'Lorem ipsum';
-		tags: '2.0.0';
-		date: '11-21-2020' asDate;
-		time: '23:03' asTime;
-		yourself.	
+	commitSha1 := '14164de82d938df2cc98186fa0225a49fe7c98e0'.
+	commitSha2 := '3206cc82d9991e2acdd10916247c114e1b173e77'.
 	
 	call1 := RefrainSelectorEntity new
 		selector: #add:;
@@ -72,7 +59,7 @@ RefrainMethodChangeTest >> setUp [
 	
 	change1 := RefrainMethodChange new 
 		method: method1;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call3 };
@@ -82,7 +69,7 @@ RefrainMethodChangeTest >> setUp [
 	"Same as change1"
 	change2 := RefrainMethodChange new 
 		method: method1;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call3 };
@@ -92,7 +79,7 @@ RefrainMethodChangeTest >> setUp [
 	"Different method"
 	change3 := RefrainMethodChange new 
 		method: method2;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call3 };
@@ -102,7 +89,7 @@ RefrainMethodChangeTest >> setUp [
 	"Different commit"
 	change4 := RefrainMethodChange new 
 		method: method1;
-		commit: commit2;
+		commitSha: commitSha2;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call3 };
@@ -112,7 +99,7 @@ RefrainMethodChangeTest >> setUp [
 	"Different oldSourceCode"
 	change5 := RefrainMethodChange new 
 		method: method1;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '3 * 5 asFloat';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call3 };
@@ -122,7 +109,7 @@ RefrainMethodChangeTest >> setUp [
 	"Different newSourceCode"
 	change6 := RefrainMethodChange new 
 		method: method1;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '5 minus: 4';
 		addedEntities: { call1 . call3 };
@@ -132,7 +119,7 @@ RefrainMethodChangeTest >> setUp [
 	"Different addedMethodCalls"
 	change7 := RefrainMethodChange new 
 		method: method1;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call5 };
@@ -142,7 +129,7 @@ RefrainMethodChangeTest >> setUp [
 	"Different deletedMethodCalls"
 	change8 := RefrainMethodChange new 
 		method: method1;
-		commit: commit1;
+		commitSha: commitSha1;
 		oldSourceCode: '1 + 2';
 		newSourceCode: '1 add: 2';
 		addedEntities: { call1 . call3 };

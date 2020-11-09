@@ -16,25 +16,13 @@ RefrainMethodChangeMock >> branch [
 ]
 
 { #category : #'as yet unclassified' }
-RefrainMethodChangeMock >> commit1 [
-	^ RefrainCommit new
-		sha: '84ed7471d4a6c0f5c070a6bfe8ab3371f0188035';
-		message: 'Fixed a bug';
-		author: 'olekscode';
-		date: '27 April 2020' asDate;
-		time: '15:53:12' asTime;
-		yourself.
+RefrainMethodChangeMock >> commitSha1 [
+	^ '84ed7471d4a6c0f5c070a6bfe8ab3371f0188035'
 ]
 
 { #category : #'as yet unclassified' }
-RefrainMethodChangeMock >> commit2 [
-	^ RefrainCommit new
-		sha: '57acf893b567393fec7967f0c32306fccda9321d';
-		message: 'Fixed a bug';
-		author: 'Oleksandr Zaitsev';
-		date: '26 August 2020' asDate;
-		time: '19:41:40' asTime;
-		yourself.
+RefrainMethodChangeMock >> commitSha2 [
+	^ '57acf893b567393fec7967f0c32306fccda9321d'
 ]
 
 { #category : #'as yet unclassified' }
@@ -73,7 +61,7 @@ RefrainMethodChangeMock >> methodCall2 [
 RefrainMethodChangeMock >> methodChange1 [
 	^ RefrainMethodChange new 
 		method: self method1;
-		commit: self commit1;
+		commitSha: self commitSha1;
 		oldSourceCode: self oldSourceCode1;
 		newSourceCode: self newSourceCode1;
 		yourself.
@@ -83,7 +71,7 @@ RefrainMethodChangeMock >> methodChange1 [
 RefrainMethodChangeMock >> methodChange2 [
 	^ RefrainMethodChange new 
 		method: self method2;
-		commit: self commit2;
+		commitSha: self commitSha2;
 		oldSourceCode: self oldSourceCode2;
 		newSourceCode: self newSourceCode2;
 		yourself.

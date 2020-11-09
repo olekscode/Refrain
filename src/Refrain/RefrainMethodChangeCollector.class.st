@@ -56,7 +56,7 @@ RefrainMethodChangeCollector >> extractAllCommitsFromRepository [
 	
 	allCommits do: [ :commit |
 		project iceCommits at: commit id put: commit.
-		project commits at: commit id put: commit asRefrainCommit ].
+		project commits at: commit id put: commit asDepCommit ].
 	
 	project repository tags do: [ :tag |
 		project commits
@@ -73,7 +73,7 @@ RefrainMethodChangeCollector >> extractMethodChangesFromDiff: aDiff [
 		select: [ :each | each isMethodChange ]
 		thenCollect: [ :each |
 			each asRefrainMethodChange
-				commit: aDiff sourceVersion asRefrainCommit;
+				commitSha: aDiff sourceVersion id;
 				yourself. ].
 ]
 

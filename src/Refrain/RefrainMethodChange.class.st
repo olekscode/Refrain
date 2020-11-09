@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'method',
-		'commit',
+		'commitSha',
 		'oldSourceCode',
 		'newSourceCode',
 		'addedEntities',
@@ -18,7 +18,7 @@ RefrainMethodChange >> = anObject [
 		ifFalse: [ ^ false ].
 		
 	^ anObject method = method and: [ 
-		anObject commit = commit and: [ 
+		anObject commitSha = commitSha and: [ 
 			anObject oldSourceCode = oldSourceCode and: [ 
 				anObject newSourceCode = newSourceCode and: [ 
 					anObject addedEntities = addedEntities and: [ 
@@ -36,13 +36,13 @@ RefrainMethodChange >> addedEntities: anObject [
 ]
 
 { #category : #accessing }
-RefrainMethodChange >> commit [
-	^ commit
+RefrainMethodChange >> commitSha [
+	^ commitSha
 ]
 
 { #category : #accessing }
-RefrainMethodChange >> commit: anObject [
-	commit := anObject
+RefrainMethodChange >> commitSha: anObject [
+	commitSha := anObject
 ]
 
 { #category : #accessing }
@@ -58,7 +58,7 @@ RefrainMethodChange >> deletedEntities: anObject [
 { #category : #comparing }
 RefrainMethodChange >> hash [
 	| fields |
-	fields := { method . commit . oldSourceCode . newSourceCode . addedEntities . deletedEntities }.
+	fields := { method . commitSha . oldSourceCode . newSourceCode . addedEntities . deletedEntities }.
 	
 	^ fields inject: self class hash into: [ :sum :each |
 		sum bitXor: each hash ]

@@ -9,26 +9,17 @@ Class {
 
 { #category : #running }
 RefrainSelectorCollectorTest >> setUp [
-	| method commit |
+	| method |
 	super setUp.
 	
 	method := RefrainMethod new
 		className: #RefrainTestsMockClass;
 		selector: #mockOldSelect:;
 		yourself.
-		
-	commit := RefrainCommit new
-		sha: '14164de82d938df2cc98186fa0225a49fe7c98e0';
-		message: 'Hello world';
-		author: 'Oleksandr Zaitsev';
-		tags: #('1.0.1');
-		date: '10-12-2020' asDate;
-		time: '15:30' asTime;
-		yourself.
 	
 	methodChange := RefrainMethodChange new
 		method: method;
-		commit: commit;
+		commitSha: '14164de82d938df2cc98186fa0225a49fe7c98e0';
 		oldSourceCode: (RefrainMethodsMock >> #mockOldSelect:) sourceCode;
 		newSourceCode: (RefrainMethodsMock >> #mockNewSelect:) sourceCode;
 		yourself.
