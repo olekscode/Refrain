@@ -36,11 +36,6 @@ Refrain class >> repositoryName: aRepositoryName firstCommit: aFirstCommit lastC
 		yourself.
 ]
 
-{ #category : #history }
-Refrain >> commitDictionary [
-	^ methodChangeCollector project commits
-]
-
 { #category : #accessing }
 Refrain >> entityCollector: aRefrainEntityCollector [
 	entityCollector := aRefrainEntityCollector
