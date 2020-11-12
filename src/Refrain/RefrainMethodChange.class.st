@@ -64,6 +64,12 @@ RefrainMethodChange >> hash [
 		sum bitXor: each hash ]
 ]
 
+{ #category : #testing }
+RefrainMethodChange >> isRelevant [
+	"Only method changes that a non-empty list of both added and deleted entities can be relevant for mining frequent entity replacements"
+	^ addedEntities isNotEmpty and: [ deletedEntities isNotEmpty ]
+]
+
 { #category : #accessing }
 RefrainMethodChange >> method [
 	^ method
