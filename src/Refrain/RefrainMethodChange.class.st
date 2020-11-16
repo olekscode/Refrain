@@ -67,7 +67,11 @@ RefrainMethodChange >> hash [
 { #category : #testing }
 RefrainMethodChange >> isRelevant [
 	"Only method changes that a non-empty list of both added and deleted entities can be relevant for mining frequent entity replacements"
-	^ addedEntities isNotEmpty and: [ deletedEntities isNotEmpty ]
+	(addedEntities isNotEmpty and: [ deletedEntities isNotEmpty ])
+		ifFalse: [ ^ false ].
+		
+	"Method changes that have too many deleted or added entities are irrelevant because the method changed too much - perhaps it was completely rewritten - and we can not use it to infer small specific changes"
+	^ addedEntities size <= 4 and: [ deletedEntities size <= 4 ]
 ]
 
 { #category : #accessing }
