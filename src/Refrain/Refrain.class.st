@@ -5,7 +5,9 @@ Class {
 		'firstCommit',
 		'lastCommit',
 		'minNumberOfRepetitions',
+		'maxNumberOfEntities',
 		'methodChanges',
+		'relevantMethodChanges',
 		'methodChangeCollector',
 		'entityCollector',
 		'rules'
@@ -16,6 +18,11 @@ Class {
 { #category : #'as yet unclassified' }
 Refrain class >> defaultEntityCollectorClass [
 	^ RefrainSelectorCollector
+]
+
+{ #category : #'as yet unclassified' }
+Refrain class >> defaultMaxNumberOfEntities [
+	^ 4
 ]
 
 { #category : #'as yet unclassified' }
@@ -50,6 +57,18 @@ Refrain >> firstCommit: anObject [
 Refrain >> initialize [
 	super initialize.
 	entityCollector := self class defaultEntityCollectorClass new.
+	maxNumberOfEntities := self class defaultMaxNumberOfEntities.
+]
+
+{ #category : #testing }
+Refrain >> isMethodChangeRelevant: aMethodChange [
+	"Only method changes that a non-empty list of both added and deleted entities can be relevant for mining frequent entity replacements"
+	(aMethodChange addedEntities isNotEmpty and: [ aMethodChange deletedEntities isNotEmpty ])
+		ifFalse: [ ^ false ].
+		
+	"Method changes that have too many deleted or added entities are irrelevant because the method changed too much - perhaps it was completely rewritten - and we can not use it to infer small specific changes"
+	^ aMethodChange addedEntities size <= maxNumberOfEntities and: [
+		aMethodChange deletedEntities size <= maxNumberOfEntities ]
 ]
 
 { #category : #accessing }
@@ -65,6 +84,14 @@ Refrain >> loadMethodChanges [
 	
 	methodChanges do: [ :change |
 		entityCollector extractAddedAndDeletedEntitiesFrom: change ].
+	
+	relevantMethodChanges := methodChanges select: [ :change |
+		self isMethodChangeRelevant: change ].
+]
+
+{ #category : #accessing }
+Refrain >> maxNumberOfAddedAndDeletedEntitiesInMethodChange: aNumber [
+	maxNumberOfEntities := aNumber
 ]
 
 { #category : #accessing }
@@ -73,8 +100,8 @@ Refrain >> methodChanges [
 ]
 
 { #category : #accessing }
-Refrain >> minNumberOfRepetitions: anObject [
-	minNumberOfRepetitions := anObject
+Refrain >> minNumberOfRepetitions: aNumber [
+	minNumberOfRepetitions := aNumber
 ]
 
 { #category : #'as yet unclassified' }
@@ -87,14 +114,18 @@ Refrain >> mineRepetitiveChanges [
 { #category : #'as yet unclassified' }
 Refrain >> mineRules [
 	| miner |
-
 	miner := RefrainMiner new.
 	
 	rules := miner
-		mineRulesFrom: methodChanges
+		mineRulesFrom: relevantMethodChanges
 		withMinNumberOfRepetitions: minNumberOfRepetitions.
 		
 	self sortRules.
+]
+
+{ #category : #accessing }
+Refrain >> relevantMethodChanges [
+	^ relevantMethodChanges
 ]
 
 { #category : #accessing }

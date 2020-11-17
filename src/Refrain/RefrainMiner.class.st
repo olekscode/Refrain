@@ -42,7 +42,6 @@ RefrainMiner >> mineRulesFrom: aCollectionOfMethodChanges withMinNumberOfRepetit
 
 { #category : #'as yet unclassified' }
 RefrainMiner >> transactionsFromMethodChanges: aCollectionOfMethodChanges [
-	^ aCollectionOfMethodChanges
-		select: [ :each | each isRelevant ]
-		thenCollect: [ :each | (each addedEntities union: each deletedEntities) asItemset ].
+	^ aCollectionOfMethodChanges collect: [ :each |
+		(each addedEntities union: each deletedEntities) asItemset ].
 ]
