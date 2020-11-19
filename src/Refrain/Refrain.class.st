@@ -129,6 +129,11 @@ Refrain >> relevantMethodChanges [
 ]
 
 { #category : #accessing }
+Refrain >> relevantMethodChanges: anObject [
+	relevantMethodChanges := anObject
+]
+
+{ #category : #accessing }
 Refrain >> repository: aRepository [
 	methodChangeCollector := RefrainMethodChangeCollector forRepository: aRepository
 ]
