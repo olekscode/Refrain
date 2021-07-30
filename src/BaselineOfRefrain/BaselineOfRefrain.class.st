@@ -15,7 +15,7 @@ BaselineOfRefrain >> baseline: spec [
 			
 		spec
   			baseline: 'Clio'
-  			with: [ spec repository: 'github://olekscode/Clio/src' ].
+  			with: [ spec repository: 'github://olekscode/Clio:v0.1/src' ].
 				
 		"Packages"
 		spec 
